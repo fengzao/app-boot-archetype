@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="LOG_HOME" value="${app.log.dir:-logs}"/>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    <contextName>apply-root-service</contextName>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date{ISO8601} %-5level [%thread] %logger{32} - %message%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DAY-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <prudent>true</prudent>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <FileNamePattern>${LOG_HOME}/app.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>60</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%date{ISO8601} %-5level [%thread] %logger{32} - %message%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.wacai" level="INFO" addtivity="true">
+        <appender-ref ref="DAY-FILE"/>
+    </logger>
+    <logger name="com.alibaba" level="INFO"/>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="DAY-FILE"/>
+    </root>
+
+</configuration>
