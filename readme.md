@@ -61,7 +61,7 @@
 
 ### archetype.sh 说明
 
-`````
+```bash
 
 #!/bin/sh
 
