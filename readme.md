@@ -1,4 +1,4 @@
-# App quickly starter archetype
+# app-boot-archetype
 
 > 前段时间由于业务需求需要频繁的创建新项目, 考虑到公司业务特点每次都要干下面三件事情
 > - 拷贝一份 POM 配置文件
