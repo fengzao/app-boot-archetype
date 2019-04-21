@@ -65,23 +65,23 @@
 
 #!/bin/sh
 
-mvn clean  
-
-# 由于我的 Logback 配置在跑过测试用例以后会生产该目录
-rm -rf logs     
+mvn clean                   # 清除之前生成的相关文件
  
 mvn clean archetype:create-from-project -Darchetype.properties=archetype.properties
 
-# 通过情况 我们都是使用IDE工具编写项目, 这些工具通常会带入一些工具自定义的文件通过编写脚本删除这部分文件
-# 我使用的IDEA 工具是 IntelliJ IDEA, 故编写以下文件移除命令
-# 根据你的项目结构,你可以新增一些新的移除指令
+# 通常情况我们使用IDE工具编写项目, 这些工具会带入一些工具自定义的文件 : 通过编写脚本删除这部分文件
+# 我使用的IDEA 工具是 IntelliJ IDEA, 对应的文件移除命令如下 : 根据你的项目结构,你可以新增一些新的移除指令
 
 rm -rf target/generated-sources/archetype/src/main/resources/archetype-resources/.idea
 rm -rf target/generated-sources/archetype/src/main/resources/archetype-resources/*.iml
 rm -rf target/generated-sources/archetype/src/main/resources/archetype-resources/logs
 rm -rf target/generated-sources/archetype/src/main/resources/archetype-resources/*.sh
 
+# 经过 archetype:create-from-project 之后生成的 Archetype 项目在如下目录, 进入该目录执行 mvn install 即可完成你的项目打包部署
 cd target/generated-sources/archetype
+
+# 这里有一点必须注意： 一定要先clean 再 install. 在 archetype:create-from-project 命令之后默认会生成目标 JAR 模板
+# 由于是在执行文件移除操作之前, 所以改文件中包含一些污染文件.
 
 mvn clean install
 
