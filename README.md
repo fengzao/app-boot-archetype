@@ -57,7 +57,11 @@
 
 - 1 进入当前项目目录
 - 2 执行 sh archetype.sh (目前仅有 linux 版本启动命令, windows 版本后续新增)
-- 3 在你的 Mvn 仓库查看你的 archetype jar.
+- 3 在你的 Mvn 仓库查看你的 archetype jar. 
+
+> 特殊说明: 该命令默认生成的 archetype 项目, 其 artifactId = ${current-project-artifact-id}-archetype
+> 如果你想修改可通过 新增脚本命令调整 sed -i "" 's/<artifactId>app-boot<\/artifactId>/<artifactId>app-boot-2<\/artifactId>/  target/generated-sources/archetype/pom.xml
+
 
 
 ### archetype.sh 说明
