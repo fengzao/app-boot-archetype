@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.cokebook.archetypes</groupId>
-    <artifactId>app-quickly-starter</artifactId>
+    <artifactId>app-boot</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
